@@ -18,8 +18,6 @@ public class Tarefa {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    private String titulo;
-    private String descricao;
     private String status;
     private String prioridade;
     private LocalDate data;

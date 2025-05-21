@@ -1,6 +1,7 @@
 package com.br.gestaotarefas.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,10 +13,9 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TarefaRequest {
-    private String titulo;
-    private String descricao;
     private String status;
     private String prioridade;
     private LocalDate data;
+    @JsonIgnore
     private String usuario;
 }

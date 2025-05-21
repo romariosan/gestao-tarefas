@@ -14,16 +14,14 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class TarefaResponse {
     private Long id;
-    private String titulo;
-    private String descricao;
     private String status;
     private String prioridade;
     private LocalDate data;
-    private String username;
+
     public TarefaResponse(Tarefa tarefa) {
         this.id = tarefa.getId();
-        this.titulo = tarefa.getTitulo();
-        this.descricao = tarefa.getDescricao();
         this.status = tarefa.getStatus();
+        this.prioridade = tarefa.getPrioridade();
+        this.data = tarefa.getData();
     }
 }
