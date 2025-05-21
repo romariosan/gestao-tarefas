@@ -21,16 +21,15 @@ public class JwtTokenUtil {
     @Value("${jwt.secret}")
     private String SECRET_KEY;
 
-    @Value("${jwt.expiration}")
-    private long EXPIRATION;
-
     public String extrairUsuario(String token) {
         return extrairClaim(token, Claims::getSubject);
     }
+
     public <T> T extrairClaim(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = extrairTodasClaims(token);
         return claimsResolver.apply(claims);
     }
+
     public boolean validarToken(String token, UserDetails userDetails) {
         final String username = extrairUsuario(token);
         return (username.equals(userDetails.getUsername())) && !isTokenExpirado(token);
@@ -45,28 +44,21 @@ public class JwtTokenUtil {
     private Date extrairExpiracao(String token) {
         return extrairClaim(token, Claims::getExpiration);
     }
+
     private Claims extrairTodasClaims(String token) {
-        return Jwts
-                .parserBuilder()
-                .setSigningKey(getKey())
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
+        return Jwts.parserBuilder().setSigningKey(getKey()).build().parseClaimsJws(token).getBody();
     }
+
     public String obterToken(Usuario usuario) {
         return gerarToken(new HashMap<>(), usuario);
     }
 
-    public String gerarToken(
-            Map<String, Object> extraClaims, Usuario usuario) {
-        return Jwts
-                .builder()
-                .setClaims(extraClaims)
-                .setSubject(usuario.getUsuario())
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(EXPIRATION + 1000 * 60 * 24))
-                .signWith(getKey(), SignatureAlgorithm.HS256)
-                .compact();
+    public String gerarToken(Map<String, Object> extraClaims, Usuario usuario) {
+        long umDiaEmMillis = 1000 * 60 * 60 * 24;
+        Date agora = new Date(System.currentTimeMillis());
+        Date expiracao = new Date(agora.getTime() + umDiaEmMillis);
+
+        return Jwts.builder().setClaims(extraClaims).setSubject(usuario.getUsuario()).setIssuedAt(agora).setExpiration(expiracao).signWith(getKey(), SignatureAlgorithm.HS256).compact();
     }
 
 

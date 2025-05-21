@@ -23,12 +23,12 @@ public class AutenticacaoService {
     private final AuthenticationManager authenticationManager;
 
     public AutenticacaoResponse registrar(RegistroRequest request) {
-        var user = Usuario.builder()
+        var usuario = Usuario.builder()
                 .usuario(request.getUsuario())
                 .senha(passwordEncoder.encode(request.getSenha()))
                 .build();
-        usuarioRepository.save(user);
-        var jwtToken = jwtTokenUtil.obterToken(user);
+        usuarioRepository.save(usuario);
+        var jwtToken = jwtTokenUtil.obterToken(usuario);
         return AutenticacaoResponse.builder()
                 .token(jwtToken)
                 .build();
