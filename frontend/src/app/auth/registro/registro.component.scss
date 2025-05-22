@@ -1,0 +1,83 @@
+.registro-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-dark) 100%);
+  box-sizing: border-box;
+}
+
+.registro-card {
+  max-width: 400px;
+  width: 100%;
+  padding: 24px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  background-color: var(--background-card);
+  animation: slideUp 0.5s ease;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.registro-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.registro-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+}
+
+.error-message {
+  color: var(--error-color);
+  margin-top: 12px;
+  padding: 8px 12px;
+  background-color: rgba(244, 67, 54, 0.1);
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+mat-card-header {
+  background-color: var(--primary-light);
+  color: var(--text-light);
+  margin: -24px -24px 24px -24px !important;
+  padding: 24px !important;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+
+mat-card-title {
+  margin: 0 !important;
+  font-size: 1.5rem !important;
+  font-weight: 500 !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .registro-card {
+    max-width: 100%;
+    padding: 16px;
+  }
+
+  .registro-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .registro-actions button {
+    width: 100%;
+  }
+
+  mat-card-header {
+    padding: 16px !important;
+    margin: -16px -16px 16px -16px !important;
+  }
+}

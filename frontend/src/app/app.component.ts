@@ -11,7 +11,7 @@ export class AppComponent {
 
   constructor(public authService: AuthService) {}
 
-  sair(): void {
-    this.authService.sair();
+  logout(): void {
+    this.authService.logout();
   }
 }
