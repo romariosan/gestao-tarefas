@@ -138,7 +138,7 @@ export class ListarTarefaComponent implements OnInit {
     const month = ('0' + (d.getMonth() + 1)).slice(-2);
     const day = ('0' + d.getDate()).slice(-2);
   
-    return `${day}-${month}-${year}`;
+    return `${year}-${month}-${day}`;
   }
   
 }

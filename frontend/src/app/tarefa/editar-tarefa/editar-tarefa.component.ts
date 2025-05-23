@@ -68,13 +68,11 @@ export class EditarTarefaComponent {
   
   private parseDate(dateStr: string): Date | null {
     if (!dateStr) return null;
-    
-    try {
-      return new Date(dateStr);
-    } catch (e) {
-      return null;
-    }
+  
+    const [year, month, day] = dateStr.split('-').map(Number);
+    return new Date(year, month - 1, day); // mês é 0-based
   }
+  
   
   private formatDate(date: Date): string {
     if (!date) return '';

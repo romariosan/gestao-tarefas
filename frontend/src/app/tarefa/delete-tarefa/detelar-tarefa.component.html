@@ -5,11 +5,11 @@
   <div class="delete-detalhes">
     <p><strong>Status:</strong> {{ data.status }}</p>
     <p><strong>Prioridade:</strong> {{ data.prioridade }}</p>
-    <p><strong>Data:</strong> {{ data.data }}</p>
+    <p><strong>Data:</strong> {{ data.data | date:'dd/MM/yyyy' }}</p>
   </div>
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
   <button mat-button (click)="cancelar()">Cancelar</button>
   <button mat-raised-button color="warn" (click)="confirmar()">Excluir</button>
-</mat-dialog-actions>delete-detalhes
+</mat-dialog-actions>
