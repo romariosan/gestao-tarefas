@@ -30,6 +30,8 @@ export class EditarTarefaComponent {
     if (this.tarefaForm.valid) {
       const tarefaDados: Tarefa = {
         ...this.tarefaForm.value,
+        status: this.tarefaForm.value.status?.toLowerCase(),
+        prioridade: this.tarefaForm.value.prioridade?.toLowerCase(),
         data: this.formatDate(this.tarefaForm.value.data)
       };
       

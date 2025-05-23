@@ -29,6 +29,8 @@ export class CriarTarefaComponent {
     if (this.tarefaForm.valid) {
       const taredaDados: Tarefa = {
         ...this.tarefaForm.value,
+        status: this.tarefaForm.value.status?.toLowerCase(),
+        prioridade: this.tarefaForm.value.prioridade?.toLowerCase(),
         data: this.formatDate(this.tarefaForm.value.data)
       };
       
