@@ -21,11 +21,11 @@ export class RegistroComponent {
   ) {
     this.registroForm = this.fb.group({
       usuario: ['', [Validators.required]],
-      senha: ['', [Validators.required, Validators.minLength(4)]]
+      senha: ['', [Validators.required]]
     });
   }
   
-  onSubmit(): void {
+  registrar(): void {
     if (this.registroForm.valid) {
       const userData: AuthRequest = this.registroForm.value;
       
@@ -59,7 +59,7 @@ export class RegistroComponent {
     }
   }
   
-  navigateToLogin(): void {
+  irParaTelaLogin(): void {
     this.router.navigate(['/login']);
   }
 }

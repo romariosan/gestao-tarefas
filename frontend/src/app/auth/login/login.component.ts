@@ -59,7 +59,7 @@ export class LoginComponent {
     }
   }
   
-  navigateToRegister(): void {
-    this.router.navigate(['/registro']);
+  irParaTelaRegistrar(): void {
+    this.router.navigate(['/registrar']);
   }
 }

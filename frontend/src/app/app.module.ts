@@ -21,18 +21,32 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatNativeDateModule } from '@angular/material/core';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
+import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
 import { LoginComponent } from './auth/login/login.component';
 import { RegistroComponent } from './auth/registro/registro.component';
+import { ListarTarefaComponent } from './tarefa/listar-tarefa/listar-tarefa.component';
+import { CriarTarefaComponent } from './tarefa/criar-tarefa/criar-tarefa.component';
+import { EditarTarefaComponent } from './tarefa/editar-tarefa/editar-tarefa.component';
+import { DeletarTarefaComponent } from './tarefa/delete-tarefa/detelar-tarefa.component';
+import { LoadingComponent } from './shared/components/loading/loading.component';
+import { DATA_FORMATADA_BR } from './utils/date-format';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegistroComponent
+    RegistroComponent,
+    ListarTarefaComponent,
+    CriarTarefaComponent,
+    EditarTarefaComponent,
+    DeletarTarefaComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +74,13 @@ import { RegistroComponent } from './auth/registro/registro.component';
     MatToolbarModule,
     AppRoutingModule
   ],
-
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
+    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+    { provide: MAT_DATE_FORMATS, useValue: DATA_FORMATADA_BR },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

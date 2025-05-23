@@ -1,0 +1,36 @@
+<h2 mat-dialog-title>Nova Tarefa</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="tarefaForm" class="tarefa-form">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Status</mat-label>
+      <input matInput formControlName="status" placeholder="Ex: pendente, em andamento, concluído" required>
+      <mat-error *ngIf="tarefaForm.get('status')?.hasError('required')">
+        Status é obrigatório
+      </mat-error>
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Prioridade</mat-label>
+      <input matInput formControlName="prioridade" placeholder="Ex: alta, média, baixa" required>
+      <mat-error *ngIf="tarefaForm.get('prioridade')?.hasError('required')">
+        Prioridade é obrigatória
+      </mat-error>
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Data</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="data" required>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="tarefaForm.get('data')?.hasError('required')">
+        Data é obrigatória
+      </mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancelar()">Cancelar</button>
+  <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="tarefaForm.invalid">Salvar</button>
+</mat-dialog-actions>
