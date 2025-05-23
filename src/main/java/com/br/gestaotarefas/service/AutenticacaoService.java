@@ -23,6 +23,12 @@ public class AutenticacaoService {
     private final AuthenticationManager authenticationManager;
 
     public AutenticacaoResponse registrar(RegistroRequest request) {
+        if (usuarioRepository.findByUsuario(request.getUsuario()).isPresent()) {
+            return AutenticacaoResponse.builder()
+                    .mensagem("Usuário já existe. Por favor, escolha outro nome de usuário.")
+                    .build();
+        }
+
         var usuario = Usuario.builder()
                 .usuario(request.getUsuario())
                 .senha(passwordEncoder.encode(request.getSenha()))
@@ -31,6 +37,7 @@ public class AutenticacaoService {
         var jwtToken = jwtTokenUtil.obterToken(usuario);
         return AutenticacaoResponse.builder()
                 .token(jwtToken)
+                .mensagem("Usuário registrado com sucesso!")
                 .build();
     }
 

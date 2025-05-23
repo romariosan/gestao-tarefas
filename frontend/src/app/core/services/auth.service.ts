@@ -11,6 +11,7 @@ export interface AuthRequest {
 
 export interface AuthResponse {
   token: string;
+  mensagem?: string;
 }
 
 @Injectable({
@@ -19,7 +20,7 @@ export interface AuthResponse {
 export class AuthService {
   private readonly API_URL = 'http://localhost:8080/api/auth';
   private readonly TOKEN_KEY = 'auth_token';
-  
+
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.hasToken());
   isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
 
@@ -47,7 +48,18 @@ export class AuthService {
   registro(userData: AuthRequest): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.API_URL}/registrar`, userData)
       .pipe(
+        tap(response => {
+          if (response.token) {
+            this.setToken(response.token);
+            this.isAuthenticatedSubject.next(true);
+          } else if (response.mensagem) {
+            throw new Error(response.mensagem);
+          }
+        }),
         catchError(error => {
+          if (error instanceof Error) {
+            return throwError(() => error);
+          }
           return throwError(() => new Error('Erro ao registrar usuário. Tente novamente.'));
         })
       );

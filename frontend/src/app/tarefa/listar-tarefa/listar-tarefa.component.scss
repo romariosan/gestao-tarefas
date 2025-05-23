@@ -96,7 +96,7 @@ table {
   margin: 16px;
 }
 
-/* Status indicators */
+
 .status-indicator {
   display: inline-block;
   width: 10px;
@@ -117,7 +117,7 @@ table {
   background-color: var(--primary-color);
 }
 
-/* Tablet */
+
 @media (max-width: 960px) {
   .header h1 {
     font-size: 1.5rem;
@@ -128,7 +128,7 @@ table {
   }
 }
 
-/* Mobile */
+
 @media (max-width: 768px) {
   .header {
     flex-direction: column;

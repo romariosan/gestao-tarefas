@@ -42,7 +42,7 @@ button.mat-mdc-raised-button {
   min-width: 90px;
 }
 
-/* Animation for dialog */
+
 :host {
   animation: dialogFadeIn 0.3s ease;
 }
@@ -52,7 +52,7 @@ button.mat-mdc-raised-button {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Responsive adjustments */
+
 @media (max-width: 600px) {
   .tarefa-form {
     min-width: unset;

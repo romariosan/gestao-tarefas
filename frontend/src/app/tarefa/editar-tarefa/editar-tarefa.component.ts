@@ -72,7 +72,7 @@ export class EditarTarefaComponent {
     if (!dateStr) return null;
   
     const [year, month, day] = dateStr.split('-').map(Number);
-    return new Date(year, month - 1, day); // mês é 0-based
+    return new Date(year, month - 1, day);
   }
   
   
